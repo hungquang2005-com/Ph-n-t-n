@@ -1,0 +1,24 @@
+<h2>Đọc truyện</h2>
+<div id="content"></div>
+<button onclick="loadMore()">Tải thêm</button>
+
+<script>
+let page = 0;
+const fileId = "{{ file_id }}";
+
+function loadMore() {
+    fetch(`/api/read/${fileId}?page=${page}`)
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("content").innerHTML +=
+                `<pre>${data.content}</pre>`;
+            page++;
+        });
+}
+
+// 🔥 LOAD 5 TRANG ĐẦU KHI VÀO TRANG
+window.onload = function () {
+    loadMore();
+};
+</script>
+
